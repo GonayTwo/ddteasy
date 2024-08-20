@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo-ddteasy.svg') }}" alt="DDTeasy Logo" class="h-10">

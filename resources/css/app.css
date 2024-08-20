@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import 'choices.js/public/assets/styles/choices.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-opac: 0 0 0;
+    }
+}
+
+/* Code for Firefox */
+::-moz-selection {
+    @apply bg-orange-ddteasy text-white
+}
+
+::selection {
+    @apply bg-orange-ddteasy text-white
+}
+
+::-webkit-scrollbar {
+    @apply h-2 w-2
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-violet-900
+}
+
+/* Vanilla Calendar Styles */
+.vanilla-calendar {
+    width: -webkit-fill-available !important;
+    padding: 0 !important;
+}
+
+.vanilla-calendar-months__month,
+.vanilla-calendar-day,
+.vanilla-calendar-day__btn {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    aspect-ratio: 1/1;
+    border-radius: 0 !important;
+    border: 0px solid #e5e7eb;
+    max-width: 40px !important;
+    transition: all 0.1s ease-in-out !important;
+}
+
+@media screen and (min-width: 400px) {
+    .vanilla-calendar-months__month,
+    .vanilla-calendar-day,
+    .vanilla-calendar-day__btn {
+        max-width: 55px !important;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .vanilla-calendar-months__month,
+    .vanilla-calendar-day,
+    .vanilla-calendar-day__btn {
+        max-width: 100% !important;
+    }
+}
+
+.vanilla-calendar-days,
+.vanilla-calendar-months {
+    gap: 0 !important;
+    border: 1px solid gainsboro;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.vanilla-calendar-months__month {
+    width: 100%;
+    border: 0px solid #e5e7eb !important;
+    aspect-ratio: 1/1;
+    height: auto !important;
+}
+
+@media (min-width: 768px) {
+
+    .vanilla-calendar-months__month,
+    .vanilla-calendar-day {
+        aspect-ratio: 4/3;
+    }
+}
+
+.vanilla-calendar-day__btn_prev,
+.vanilla-calendar-day__btn_next {
+    background-color: #fff7ed;
+}
+
+.vanilla-calendar-day__btn_disabled,
+.vanilla-calendar-months__month_disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af !important;
+}
+
+.vanilla-calendar-week__day {
+    font-size: 1rem !important;
+    text-transform: uppercase;
+}
+
+.vanilla-calendar-week__day_weekend,
+.vanilla-calendar-day__btn_weekend {
+    color: #dc2626;
+}
+
+.vanilla-calendar-arrow::before {
+    background: #4f1d96 !important;
+}
+
+.vanilla-calendar-months__month:hover,
+.vanilla-calendar-months__month_selected,
+.vanilla-calendar-day__btn:hover,
+.vanilla-calendar-day_selected,
+.vanilla-calendar-day__btn_selected {
+    color: #fff !important;
+    background-color: #4f1d96 !important;
+}
+
+.vanilla-calendar-day__btn_today {
+    color: #F28A20 !important;
+    background-color: transparent !important;
+}
+
+.vanilla-calendar-year,
+.vanilla-calendar-month {
+    color: #4f1d96 !important;
+    font-size: 1.5rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+
+    transition: all 0.15s ease-in-out;
+}
+
+.vanilla-calendar-month:hover {
+    color: #F28A20 !important;
+}
+
+/* politicas */
+.page-policies {
+    @apply max-w-screen-xl mx-auto py-8 md:py-16 space-y-8    
+}
+
+.page-policies h1 {
+    @apply text-purple-900 font-bold text-2xl lg:text-3xl leading-10
+}
+.page-policies a {
+    @apply text-orange-ddteasy font-medium underline hover:text-purple-900 transition-all ease-in-out
+}
+
+.page-policies ol {
+    @apply list-decimal pl-8
+}
+
+.page-policies ul {
+    @apply list-disc pl-8
+}
+
+.page-policies ul li,
+.page-policies ol li {
+    @apply text-slate-900 leading-8
+}
+
+.page-policies ol li::marker {
+    @apply font-semibold
+}
+
+.service-description {
+    @apply text-lg py-4 md:py-8 space-y-2
+}
+
+.service-description h2 {
+    @apply text-purple-900 font-bold text-xl
+}
+
+.service-description h3 {
+    @apply text-orange-ddteasy font-bold text-lg
+}
+
+.service-description ol,
+.service-description ul {
+    @apply list-inside
+}
+
+.service-description ol li,
+.service-description ul li {
+    @apply p-0
+}
+
+.service-description ol {
+    @apply list-decimal
+}
+
+.service-description ul {
+    @apply list-disc
+}
+
+.observations-content {
+    @apply w-full py-4 space-y-2
+}
+
+.observations-content h2 {
+    @apply text-purple-900 font-bold text-xl
+}
+
+.observations-content h3 {
+    @apply text-orange-ddteasy font-bold text-lg
+}
+
+.observations-content ol,
+.observations-content ul {
+    @apply list-inside
+}
+
+.observations-content ol li,
+.observations-content ul li {
+    @apply p-0
+}
+
+.observations-content ol {
+    @apply list-decimal
+}
+
+.observations-content ul {
+    @apply list-disc
+}
