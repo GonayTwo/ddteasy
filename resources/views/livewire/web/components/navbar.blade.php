@@ -1,4 +1,8 @@
 <nav class="bg-white">
+  <!-- Aviso de operação apenas no estado do Recife -->
+    <div class="bg-orange-ddteasy text-black text-center p-2 font-medium">
+        Aviso: Estamos operando apenas em Recife-PE.
+    </div>
     <div class="flex flex-wrap items-center mx-auto p-4 lg:px-20 lg:py-6">
         <a href="{{ route('site.home') }}" class="flex items-center">
             <img src="{{ asset('images/logo-ddteasy.svg') }}" class="h-12 lg:w-60 lg:h-auto"
