@@ -53,7 +53,10 @@
 
                             @if ($companies->isEmpty())
                                 <h2 class="text-xl md:text-2xl text-violet-900 font-bold text-center w-full">
-                                    Ops, não foram encontradas empresas com este perfil...
+                                    Ops, não foram encontradas empresas com a data selecionada...
+                                </h2>
+                                <h2 class="text-xl md:text-2xl text-violet-900 font-bold text-center w-full">
+                                    Selecione outra data
                                 </h2>
                                 <a href="{{ route('site.home') }}"
                                     class="bg-orange-ddteasy py-2 px-8 max-w-xs mx-auto text-white text-center transition ease-in-out hover:bg-violet-900 text-xl font-semibold">Ir
@@ -106,7 +109,7 @@
                                                 <p class="text-2xl md:text-4xl font-bold text-orange-ddteasy">
                                                     {{ number_format($company->companyServices->first()->daily_price / 100, 2, ',', '.') }}
                                                 </p>
-                                                <p class="text-gray-600 text-sm md:text-base">Por dia</p>
+                                                <p class="text-gray-600 text-sm md:text-base">Total</p>
                                             </div>
                                         </div>
 
