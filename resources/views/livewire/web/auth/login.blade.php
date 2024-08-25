@@ -29,6 +29,7 @@
                 <div class="text-center mb-4 md:mb-8">
                     <h2 class="text-orange-ddteasy font-bold mb-4 text-3xl md:text-4xl">Login do usuário</h2>
                     <p>Faça login informando seu e-mail e senha abaixo.</p>
+                    <p>É um prestador? <a href="#" class="text-violet-800">Clique aqui</a> para fazer login<p>
                 </div>
 
                 <form class="w-full" wire:submit="save">

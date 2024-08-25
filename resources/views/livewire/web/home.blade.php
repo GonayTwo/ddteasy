@@ -123,4 +123,9 @@
 
     <livewire:web.components.cta title="Faça parte da maior plataforma de dedetização do Brasil" />
     <livewire:web.components.contact title="Entre em contato" />
+    <!-- Botão flutuante do WhatsApp -->
+<a href="https://wa.me/5511999999999" target="_blank" class="fixed bottom-6 right-6 bg-orange-ddteasy rounded-full p-3 shadow-lg z-50 hover:bg-violet-800">
+    <img src="{{ asset('images/whatsapp-logo.png') }}" alt="WhatsApp" class="w-12 h-12">
+</a>
+
 </div>
