@@ -62,4 +62,8 @@
             </ul>
         </div>
     </div>
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5511944440033" target="_blank" class="fixed bottom-6 right-6 bg-orange-ddteasy rounded-full p-3 shadow-lg z-50 hover:bg-violet-800">
+        <img src="{{ asset('images/whatsapp-logo.png') }}" alt="WhatsApp" class="w-12 h-12">
+    </a>
 </nav>
