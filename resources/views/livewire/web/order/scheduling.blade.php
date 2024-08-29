@@ -40,17 +40,14 @@
             <div class="w-full flex flex-col md:flex-row gap-4">
                 <div class="px-2 md:px-4 w-full">
                     <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
-                        Selecione a empresa
+                        Escolha uma data para seu serviço
                     </h1>
-
                     <div
                         class="flex flex-row md:flex-col gap-6 py-10 px-2 md:px-4 h-fit overflow-scroll md:h-auto md:overflow-auto">
                         @error('form.service')
                             <h2 class="text-lg md:text-xl text-center text-red-500 font-bold py-8">{{ $message }}</h2>
                         @enderror
-
                         @if ($companies)
-
                             @if ($companies->isEmpty())
                                 <h2 class="text-xl md:text-2xl text-violet-900 font-bold text-center w-full">
                                     Ops, não foram encontradas empresas com a data selecionada...
@@ -59,8 +56,9 @@
                                     Selecione outra data
                                 </h2>
                                 <a href="{{ route('site.home') }}"
-                                    class="bg-orange-ddteasy py-2 px-8 max-w-xs mx-auto text-white text-center transition ease-in-out hover:bg-violet-900 text-xl font-semibold">Ir
-                                    para a Home</a>
+                                    class="bg-orange-ddteasy py-2 px-8 max-w-xs mx-auto text-white text-center transition ease-in-out hover:bg-violet-900 text-xl font-semibold">
+                                    Ir para a Home
+                                </a>
                             @endif
 
                             @foreach ($companies as $company)
@@ -127,7 +125,7 @@
                             @endforeach
                         @else
                             <h2 class="text-xl md:text-2xl text-violet-900 font-bold text-center w-full">
-                                Selecione uma data para mostrar as empresas disponíveis
+                                
                             </h2>
                         @endif
                     </div>
