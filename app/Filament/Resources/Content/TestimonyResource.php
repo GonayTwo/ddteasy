@@ -46,7 +46,7 @@ class TestimonyResource extends Resource
                         ->imageEditor()
                         ->imageEditorMode(1)
                         ->imageCropAspectRatio('1:1')
-                        ->required(),
+                        ->default(0),
                     Forms\Components\TextInput::make('sort')
                         ->label('Ordem')
                         ->numeric()
