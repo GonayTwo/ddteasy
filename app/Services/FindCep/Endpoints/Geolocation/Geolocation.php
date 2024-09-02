@@ -4,6 +4,8 @@ namespace App\Services\FindCep\Endpoints\Geolocation;
 
 use App\Services\FindCep\Endpoints\BaseEndpoint;
 use App\Services\FindCep\Entities\Coordinates;
+use App\Services\FindCep\Entities\Address;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class Geolocation extends BaseEndpoint

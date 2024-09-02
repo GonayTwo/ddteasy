@@ -35,8 +35,15 @@
                 <div
                     class="swiper-slide h-[450px] flex flex-col justify-between px-8 relative after:absolute after:right-0 after:w-px after:h-2/4 after:bg-slate-300 after:top-2/4 after:-translate-y-2/4">
                     <div class="relative rounded-full max-w-fit bg-gray-200 p-3 mx-auto mb-12">
-                        <img src="{{ asset('storage/'. $testimony->image) }}" class="block mx-auto rounded-full h-48"
+                        @if($testimony->image == null)
+                        <img src="{{ asset('storage/UserImg.png') }}" class="block mx-auto rounded-full h-8 w-8"
                             alt="{{ $testimony->name }}">
+                        
+                        @else
+                        <img src="{{ asset('storage/'. $testimony->image) }}" class="block mx-auto rounded-full h-8 w-8"
+                            alt="{{ $testimony->name }}">
+                        
+                        @endif
                     </div>
 
                     <h3 class="text-violet-900 leading-relaxed font-semibold my-10 text-xl md:text-2xl">
