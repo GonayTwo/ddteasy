@@ -123,4 +123,6 @@
 
     <livewire:web.components.cta title="Faça parte da maior plataforma de dedetização do Brasil" />
     <livewire:web.components.contact title="Entre em contato" />
+
+
 </div>
