@@ -79,7 +79,7 @@
                                 <span class="block text-orange-ddteasy text-3xl font-semibold">
                                     R$ {{ number_format($company_service->daily_price / 100, 2, ',', '.') }}
                                 </span>
-                                <span>por dia</span>
+                                <span>total</span>
                             </div>
                         </div>
 
