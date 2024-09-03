@@ -1,27 +1,31 @@
 <div class="font-poppins">
-    <div class="relative w-full h-auto xl:h-[80vh] bg-center bg-cover px-4 pt-12 md:px-0 md:ps-20 md:pt-32 z-10"
-        style="background-image: url('{{ asset('images/hero.jpg') }}')">
-        <div class="md:flex md:space-x-8 md:items-stretch">
-            <div class="max-w-screen-sm bg-white p-2 md:p-12 shadow-lg">
-                <div class="text-violet-900 mb-8 text-center md:text-start">
-                    <h1 class="text-xl md:text-4xl font-bold mb-2">Encontre um especialista e acabe com as pragas!</h1>
-                    <h2 class="text-lg md:text-2xl font-semibold">Preencha com as informações adequadas</h2>
-                </div>
-                <livewire:web.components.search-service />
+<div class="relative w-full h-auto xl:h-[80vh] bg-center bg-cover px-4 pt-8 md:px-8 md:pt-16 lg:px-12 lg:pt-18 z-10"
+     style="background-image: url('{{ asset('images/hero.jpg') }}')">
+    <div class="flex flex-col md:flex-row md:space-x-8 md:items-stretch">
+        <!-- Formulário -->
+        <div class="max-w-screen-sm bg-white p-4 md:p-8 lg:p-10 shadow-lg mb-8 md:mb-0">
+            <div class="text-violet-900 mb-4 text-center md:text-start">
+                <h1 class="text-2xl md:text-4xl font-bold mb-2">Encontre um especialista e acabe com as pragas!</h1>
+                <h2 class="text-lg md:text-2xl font-semibold">Preencha com as informações adequadas</h2>
             </div>
-                <div class="relative h-1/2 self-end text-white mb-6 md:mb-12 text-center md:text-start rounded-lg">
-                    <div class="absolute inset-0 bg-black opacity-30 rounded-lg"></div>
-                    <div class="relative p-4 md:p-8">
-                        <h1 class="mb-4 leading-snug font-bold text-xl md:text-5xl">
-                            As melhores opções em controle de pragas num só lugar
-                        </h1>
-                        <h2 class="font-semibold md:w-5/6 md:text-3xl">
-                            Aqui você encontra os mais qualificados profissionais para resolver o seu problema.
-                        </h2>
-                    </div>                    
-                </div>
+            <livewire:web.components.search-service />
+        </div>
+        <!-- Seção de Texto -->
+        <div class="relative h-auto md:h-1/2 text-white md:mb-6 md:text-center md:text-start rounded-lg self-end sm:mb-8">
+            <div class="absolute inset-0 bg-black opacity-30 rounded-lg"></div>
+            <div class="relative p-4 md:p-8 lg:p-12 flex flex-col justify-center min-h-[200px]">
+                <h1 class="mb-4 leading-snug font-bold text-xl md:text-3xl lg:text-4xl">
+                    As melhores opções em controle de pragas num só lugar
+                </h1>
+                <h2 class="font-semibold text-base md:text-lg lg:text-xl">
+                    Aqui você encontra os mais qualificados profissionais para resolver o seu problema.
+                </h2>
+            </div>
         </div>
     </div>
+</div>
+
+
 
     <div class="flex flex-row flex-wrap bg-slate-50 py-10 px-8 md:py-20 md:px-10 xl:pb-[240px] 2xl:pb-20 items-center md:justify-end">
         <div class="w-full xl:w-1/2 xl:pl-24 xl:pr-12">
