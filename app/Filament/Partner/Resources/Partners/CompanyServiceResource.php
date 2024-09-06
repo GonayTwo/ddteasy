@@ -51,8 +51,8 @@ class CompanyServiceResource extends Resource
                             ->required()
                             ->inline()
                             ->live()
-                            ->hidden(fn (Forms\Get $get) => !$get('property_type'))
-                            ->options(fn (Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class)
+                            ->hidden(fn(Forms\Get $get) => !$get('property_type'))
+                            ->options(fn(Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class)
                             ->disableOptionWhen(function (Forms\Get $get, string $value) {
                                 return filament()
                                     ->getTenant()
@@ -63,23 +63,23 @@ class CompanyServiceResource extends Resource
                                     ->first() != null
                                     ||
                                     Service::find($get('service_id'))?->priceRanges()
-                                        ->where('property_type', $get('property_type'))
-                                        ->where('property_size', $value)
-                                        ->first() === null;
+                                    ->where('property_type', $get('property_type'))
+                                    ->where('property_size', $value)
+                                    ->first() === null;
                             }),
                         Money::make('daily_price')
-                            ->label(fn (Forms\Get $get): string => static::getPriceLabel(Service::find($get('service_id')), $get('property_type'), $get('property_size')))
+                            ->label(fn(Forms\Get $get): string => static::getPriceLabel(Service::find($get('service_id')), $get('property_type'), $get('property_size')))
                             ->required()
-                            ->formatStateUsing(fn (?int $state) => number_format($state / 100, 2, ',', '.'))
-                            ->dehydrateStateUsing(fn (?string $state): ?int => str($state)->replace(['.', ','], '')->toInteger())
+                            ->formatStateUsing(fn(?int $state) => number_format($state / 100, 2, ',', '.'))
+                            ->dehydrateStateUsing(fn(?string $state): ?int => str($state)->replace(['.', ','], '')->toInteger())
                             ->disabled(
-                                fn (Forms\Get $get): bool => Service::find($get('service_id'))?->priceRanges()
+                                fn(Forms\Get $get): bool => Service::find($get('service_id'))?->priceRanges()
                                     ->where('property_type', $get('property_type'))
                                     ->where('property_size', $get('property_size'))
                                     ->first() === null
                             )
                             ->rules([
-                                fn (Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
+                                fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
                                     $service = Service::find($get('service_id'));
 
                                     $priceRange = $service->priceRanges()
@@ -144,7 +144,7 @@ class CompanyServiceResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('property_size')
                     ->label('Tamanho do imóvel')
-                    ->formatStateUsing(fn ($record, $state) => self::getPropertySizeLabel($record, $state))
+                    ->formatStateUsing(fn($record, $state) => self::getPropertySizeLabel($record, $state))
                     ->searchable(),
                 \App\Tables\Columns\MoneyColumn::make('daily_price')
                     ->label('Valor')
