@@ -21,14 +21,17 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     // Query para buscar os serviços
     protected function getTableQuery()
     {
-        // Aqui você pode ajustar a query para trazer apenas os serviços de uma empresa específica
-        return CompanyService::query();
+        return CompanyService::query()->with('company'); // Carrega a relação 'company'
     }
 
     // Colunas da tabela
     protected function getTableColumns(): array
     {
         return [
+            Tables\Columns\TextColumn::make('company.fantasy_name') // Coluna para o prestador de serviço
+                ->label('Prestador de Serviço')
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('service.name')
                 ->label('Serviço')
                 ->searchable(),
@@ -39,10 +42,11 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
                 ->label('Tamanho do imóvel')
                 ->formatStateUsing(fn($record, $state) => $this->getPropertySizeLabel($record, $state))
                 ->searchable(),
-            Tables\Columns\TextColumn::make('daily_price')
+            Tables\Columns\TextColumn::make('daily_price') // Coluna de valor formatado
                 ->label('Valor')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->formatStateUsing(fn($state) => $this->formatMoneyToBRL($state)),
             Tables\Columns\TextColumn::make('created_at')
                 ->label('Criado em')
                 ->dateTime('d/m/Y H:i:s')
@@ -55,13 +59,13 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     }
 
     // Ações da tabela
-    protected function getTableActions(): array
-    {
-        return [
-            Tables\Actions\ViewAction::make(),
-            Tables\Actions\EditAction::make(),
-        ];
-    }
+    // protected function getTableActions(): array
+    // {
+    //     return [
+    //         Tables\Actions\ViewAction::make(),
+    //         Tables\Actions\EditAction::make(),
+    //     ];
+    // }
 
     // Filtros da tabela
     protected function getTableFilters(): array
@@ -77,5 +81,11 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     protected function getPropertySizeLabel($record, $state)
     {
         return ($record->property_type == PropertyTypes::House ? HouseRanges::tryFrom($state) : ApartmentRooms::tryFrom($state))->getLabel();
+    }
+
+    // Função para formatar o dinheiro em Real Brasileiro
+    protected function formatMoneyToBRL($value): string
+    {
+        return 'R$ ' . number_format($value / 100, 2, ',', '.'); // Divide por 100 para centavos
     }
 }
