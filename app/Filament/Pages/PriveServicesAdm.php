@@ -15,9 +15,17 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     use InteractsWithTable; // Usando o trait para tabelas
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     protected static string $view = 'filament.pages.prive-services-adm';
+
     protected static ?string $navigationLabel = 'Serviços';
+
+    protected static ?string $navigationGroup = 'Parceiros';
+
     protected static ?string $title = 'Serviços dos parceiros';
+
+    protected static ?int $navigationSort = 3;
+
     // Query para buscar os serviços
     protected function getTableQuery()
     {
