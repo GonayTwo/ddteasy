@@ -52,7 +52,7 @@ class CompanyServiceResource extends Resource
                             ->inline()
                             ->live()
                             ->hidden(fn(Forms\Get $get) => !$get('property_type'))
-                            ->options(fn(Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class),
+                            ->options(fn(Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class)
                         ->disableOptionWhen(function (Forms\Get $get, string $value) {
                             return filament()
                                 ->getTenant()
