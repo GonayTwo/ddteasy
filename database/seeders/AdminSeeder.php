@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin\Admin;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
@@ -15,12 +16,12 @@ class AdminSeeder extends Seeder
     {
         Admin::create(['phone' => '15992688383'])->each(
             fn ($admin) => User::create([
-                'first_name' => 'Agência',
-                'last_name' => 'Makeweb',
+                'first_name' => 'Squad',
+                'last_name' => 'Dev',
                 'userable_id' => $admin->id,
                 'userable_type' => Admin::class,
-                'email' => 'admin@makeweb.com.br',
-                'password' => '$2y$10$tQ.eaqIw2D8X7N.D3f2M5.0tZ.Pf29eAua2FT/TuFsAyb/D5LuF8q',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('P#ssw0rd3'),
                 'email_verified_at' => now(),
                 'remember_token' => str()->random(10),
             ])
