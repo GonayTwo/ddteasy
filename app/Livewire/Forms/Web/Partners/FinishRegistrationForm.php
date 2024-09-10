@@ -90,7 +90,8 @@ class FinishRegistrationForm extends Form
         $address_data = array_merge(
             (array) FindCepService::cep()->get($cep),
             (array) FindCepService::geolocation()->get($cep)->location,
-            ['number' => $this->number, 'complement' => $this->complement]
+            ['number' => $this->number, 'complement' => $this->complement],
+            //['number' => '22', 'street' => '$this->number', 'district' => 'df', 'city' => 'df', 'state' => 'df', 'cep' => $cep, 'complement' => 'complement']
         );
         unset($address_data['status']);
 

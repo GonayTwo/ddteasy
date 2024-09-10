@@ -52,59 +52,59 @@ class CompanyServiceResource extends Resource
                             ->inline()
                             ->live()
                             ->hidden(fn(Forms\Get $get) => !$get('property_type'))
-                            ->options(fn(Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class)
-                            ->disableOptionWhen(function (Forms\Get $get, string $value) {
-                                return filament()
-                                    ->getTenant()
-                                    ->companyServices()
-                                    ->where('service_id', $get('service_id'))
-                                    ->where('property_type', $get('property_type'))
-                                    ->where('property_size', $value)
-                                    ->first() != null
-                                    ||
-                                    Service::find($get('service_id'))?->priceRanges()
-                                    ->where('property_type', $get('property_type'))
-                                    ->where('property_size', $value)
-                                    ->first() === null;
-                            }),
+                            ->options(fn(Forms\Get $get) => $get('property_type') === PropertyTypes::House->value ? HouseRanges::class : ApartmentRooms::class),
+                        // ->disableOptionWhen(function (Forms\Get $get, string $value) {
+                        //     return filament()
+                        //         ->getTenant()
+                        //         ->companyServices()
+                        //         ->where('service_id', $get('service_id'))
+                        //         ->where('property_type', $get('property_type'))
+                        //         ->where('property_size', $value)
+                        //         ->first() != null
+                        //         ||
+                        //         Service::find($get('service_id'))?->priceRanges()
+                        //         ->where('property_type', $get('property_type'))
+                        //         ->where('property_size', $value)
+                        //         ->first() === null;
+                        // }),
                         Money::make('daily_price')
                             ->label(fn(Forms\Get $get): string => static::getPriceLabel(Service::find($get('service_id')), $get('property_type'), $get('property_size')))
                             ->required()
                             ->formatStateUsing(fn(?int $state) => number_format($state / 100, 2, ',', '.'))
                             ->dehydrateStateUsing(fn(?string $state): ?int => str($state)->replace(['.', ','], '')->toInteger())
-                            ->disabled(
-                                fn(Forms\Get $get): bool => Service::find($get('service_id'))?->priceRanges()
-                                    ->where('property_type', $get('property_type'))
-                                    ->where('property_size', $get('property_size'))
-                                    ->first() === null
-                            )
-                            ->rules([
-                                fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
-                                    $service = Service::find($get('service_id'));
+                        // ->disabled(
+                        //     fn(Forms\Get $get): bool => Service::find($get('service_id'))?->priceRanges()
+                        //         ->where('property_type', $get('property_type'))
+                        //         ->where('property_size', $get('property_size'))
+                        //         ->first() === null
+                        // )
+                        // ->rules([
+                        //     fn(Forms\Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
+                        //         $service = Service::find($get('service_id'));
 
-                                    $priceRange = $service->priceRanges()
-                                        ->where('property_type', $get('property_type'))
-                                        ->where('property_size', $get('property_size'))
-                                        ->first();
+                        //         $priceRange = $service->priceRanges()
+                        //             ->where('property_type', $get('property_type'))
+                        //             ->where('property_size', $get('property_size'))
+                        //             ->first();
 
-                                    if (is_null($priceRange)) {
-                                        $fail('O valor mínimo e máximo desse serviço ainda não está disponível');
+                        //         if (is_null($priceRange)) {
+                        //             $fail('O valor mínimo e máximo desse serviço ainda não está disponível');
 
-                                        return;
-                                    }
+                        //             return;
+                        //         }
 
-                                    $minPrice = $priceRange->min_price;
+                        //         $minPrice = $priceRange->min_price;
 
-                                    $maxPrice = $priceRange->max_price;
+                        //         $maxPrice = $priceRange->max_price;
 
-                                    $formatedMinPrice = number_format($minPrice / 100, 2, ',', '.');
-                                    $formatedMaxPrice = number_format($maxPrice / 100, 2, ',', '.');
-                                    $dehydratedValue = str($value)->replace(['.', ','], '')->toInteger();
-                                    if ($dehydratedValue < $minPrice || $dehydratedValue > $maxPrice) {
-                                        $fail("Valor mínimo: R$ {$formatedMinPrice}. Valor máximo: R$ {$formatedMaxPrice}");
-                                    }
-                                },
-                            ]),
+                        //         $formatedMinPrice = number_format($minPrice / 100, 2, ',', '.');
+                        //         $formatedMaxPrice = number_format($maxPrice / 100, 2, ',', '.');
+                        //         $dehydratedValue = str($value)->replace(['.', ','], '')->toInteger();
+                        //         if ($dehydratedValue < $minPrice || $dehydratedValue > $maxPrice) {
+                        //             $fail("Valor mínimo: R$ {$formatedMinPrice}. Valor máximo: R$ {$formatedMaxPrice}");
+                        //         }
+                        //     },
+                        // ]),
                     ]),
             ]);
     }
