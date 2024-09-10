@@ -17,7 +17,7 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.prive-services-adm';
     protected static ?string $navigationLabel = 'Serviços';
-
+    protected static ?string $title = 'Serviços dos parceiros';
     // Query para buscar os serviços
     protected function getTableQuery()
     {
@@ -29,7 +29,7 @@ class PriveServicesAdm extends Page implements Tables\Contracts\HasTable
     {
         return [
             Tables\Columns\TextColumn::make('company.fantasy_name') // Coluna para o prestador de serviço
-                ->label('Prestador de Serviço')
+                ->label('Parceiro')
                 ->sortable()
                 ->searchable(),
             Tables\Columns\TextColumn::make('service.name')
