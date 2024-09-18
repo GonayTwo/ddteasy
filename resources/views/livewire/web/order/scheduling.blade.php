@@ -37,11 +37,15 @@
 
     <div class="container mx-auto py-6 md:py-12">
         <form wire:submit="save">
+            <!-- Novo texto centralizado -->
+            <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
+                Selecione uma data, escolha a empresa e contrate o serviço
+            </h1>
             <div class="w-full flex flex-col md:flex-row gap-4">
                 <div class="px-2 md:px-4 w-full">
-                    <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
+                    {{-- <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
                         Escolha uma data para seu serviço
-                    </h1>
+                    </h1> --}}
                     <div
                         class="flex flex-row md:flex-col gap-6 py-10 px-2 md:px-4 h-fit overflow-scroll md:h-auto md:overflow-auto">
                         @error('form.service')
@@ -132,9 +136,9 @@
                 </div>
 
                 <div class="px-2 md:px-4 w-full">
-                    <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
+                    {{-- <h1 class="text-2xl md:text-4xl text-orange-ddteasy font-bold text-center w-full">
                         Agende o seu serviço
-                    </h1>
+                    </h1> --}}
 
                     <div class="py-10 px-2 relative" x-data="{ calendar: null }" x-init="calendar = new VanillaCalendar($refs.calendar, {
                         type: 'default',
