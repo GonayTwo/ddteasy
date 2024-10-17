@@ -61,8 +61,8 @@ class OrderHelper
 
         $bindings = [$coordinates->location->lat, $coordinates->location->lon, $coordinates->location->lat];
 
-        return $query->with('address', fn ($query) => $query->selectRaw($sql, $bindings))
-            ->whereHas('address', fn ($query) => $query->selectRaw($sql, $bindings)->having('distance', '<=', $radius))
+        return $query->with('address', fn($query) => $query->selectRaw($sql, $bindings))
+            ->whereHas('address', fn($query) => $query->selectRaw($sql, $bindings)->having('distance', '<=', $radius))
             ->whereHas('companyServices');
     }
 
@@ -83,22 +83,22 @@ class OrderHelper
 
     private static function sortByClosest(Collection $companies): Collection
     {
-        return $companies->sortBy(fn ($company) => $company->address->distance)->values();
+        return $companies->sortBy(fn($company) => $company->address->distance)->values();
     }
 
     private static function sortByDistant(Collection $companies): Collection
     {
-        return $companies->sortByDesc(fn ($company) => $company->address->distance)->values();
+        return $companies->sortByDesc(fn($company) => $company->address->distance)->values();
     }
 
     private static function sortByCheapest(Collection $companies): Collection
     {
-        return $companies->sortBy(fn ($company) => $company->services->first()->pivot->daily_price)->values();
+        return $companies->sortBy(fn($company) => $company->services->first()->pivot->daily_price)->values();
     }
 
     private static function sortByCostiest(Collection $companies): Collection
     {
-        return $companies->sortByDesc(fn ($company) => $company->services->first()->pivot->daily_price)->values();
+        return $companies->sortByDesc(fn($company) => $company->services->first()->pivot->daily_price)->values();
     }
 
     public static function schedulingIsInitialized(): bool
@@ -115,7 +115,14 @@ class OrderHelper
     {
         $order = new Pagarme\Entities\Orders\Order();
         $order->customer()->byId(auth()->user()->userable->pagarme->id);
-        $order->items->add(Pagarme\Entities\Orders\Item::fromCompanyService(CompanyService::find(session()->get('scheduling.order.items.0.id'))));
+
+        // Obter o serviço da empresa
+        $companyService = CompanyService::find(session()->get('scheduling.order.items.0.id'));
+        // Aplicar o desconto de 10% no valor do serviço diretamente no objeto
+        $companyService->daily_price = $companyService->daily_price * 0.9;
+        // Criar o item usando o valor ajustado
+        $order->items->add(Pagarme\Entities\Orders\Item::fromCompanyService($companyService));
+        //$order->items->add(Pagarme\Entities\Orders\Item::fromCompanyService(CompanyService::find(session()->get('scheduling.order.items.0.id'))));
         match ($payment_method) {
             PaymentMethods::CreditCard => $order->payments()->credit_card($card_id),
             PaymentMethods::Pix => $order->payments()->pix(),

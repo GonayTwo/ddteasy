@@ -76,11 +76,17 @@
                             </div>
 
                             <div class="block basis-3/12 text-end">
-                                <span class="block text-orange-ddteasy text-3xl font-semibold">
+                                <span class="block text-gray-500 text-xl font-semibold line-through">
                                     R$ {{ number_format($company_service->daily_price / 100, 2, ',', '.') }}
                                 </span>
-                                <span>total</span>
+                                <span class="text-red-600">10% de desconto!</span>
+                                <span>total com desconto</span>
+                                <span class="block text-violet-900 text-3xl font-semibold">
+                                    R$ {{ number_format($company_service->daily_price * 0.9 / 100, 2, ',', '.') }}
+                                </span>
+
                             </div>
+
                         </div>
 
                         @if ($company_service->service->observations)
@@ -163,9 +169,7 @@
                             <div class="max-w-fit flex gap-2 items-center">
                                 <input type="checkbox" wire:model.live="form.recomendations"
                                     @class([
-                                        'w-4 h-4 rounded focus:border-0
-                                                                                                                                                                                                                    ring-offset-0 checked:bg-violet-900 focus:ring-violet-900 transition-all ease-in-out
-                                                                                                                                                                                                                    cursor-pointer',
+                                        'w-4 h-4 rounded focus:border-0                                                                                                                                                                         cursor-pointer',
                                         'border-red-500' => $errors->has('form.recomendations'),
                                     ])>
                                 <label class="text-gray-600 text-sm">
@@ -184,10 +188,21 @@
 
                     <div class="text-end py-4">
                         <span class="text-2xl text-gray-900">Valor Total:</span>
-                        <span class="ml-8 text-3xl text-orange-ddteasy font-bold">
+                        
+                        <!-- Valor original riscado -->
+                        <span class="ml-8 text-xl text-gray-500 line-through">
                             R$ {{ number_format($company_service->daily_price / 100, 2, ',', '.') }}
                         </span>
+
+                        <!-- Valor com desconto -->
+                        <span class="ml-8 text-3xl text-violet-900 font-bold">
+                            R$ {{ number_format($company_service->daily_price * 0.9 / 100, 2, ',', '.') }}
+                        </span>
+                        
+                        <!-- Mensagem de desconto -->
+                        <span class="block text-red-600 text-sm">10% de desconto aplicado</span>
                     </div>
+
 
                     <div class="text-end" x-show="show">
                         <button x-on:click="show = false"

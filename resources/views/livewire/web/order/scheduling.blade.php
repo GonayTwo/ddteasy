@@ -68,8 +68,8 @@
                             @foreach ($companies as $company)
                                 <div
                                     class="w-96 max-w-full shrink-0 grow-0 md:w-auto flex flex-col md:flex-row p-8 rounded-xl border shadow-lg transition-all ease-in-out">
-                                    <img src="{{ $company->getFilamentAvatarUrl() ??
-                                        "https://ui-avatars.com/api/?name={$company->fantasy_name}&background=4a1d96&color=f28a20&bold=true" }}"
+                                    <img src="{{ $company->getFilamentAvatarUrl() ?? 
+                                        'https://ui-avatars.com/api/?name={$company->fantasy_name}&background=4a1d96&color=f28a20&bold=true' }}"
                                         alt="{{ $company->fantasy_name }}"
                                         class="block mx-auto md:flex md:mx-0 rounded-full w-full max-w-[150px] h-fit !aspect-square" />
 
@@ -80,38 +80,20 @@
                                                     {{ $company->fantasy_name }}
                                                 </h2>
 
-                                                <div
-                                                    class="flex flex-nowrap md:flex-col w-full md:w-auto justify-between md:gap-2 md:pt-1">
-                                                    {{-- TODO: Imprimir média e quantidade de avaliações da empresa --}}
-                                                    {{-- <div class="flex flex-col md:flex-row">
-                                            <div class="flex">
-                                                <i class="bi bi-star-fill text-yellow-400"></i>
-                                                <i class="bi bi-star-fill text-yellow-400"></i>
-                                                <i class="bi bi-star-fill text-yellow-400"></i>
-                                                <i class="bi bi-star-fill text-yellow-400"></i>
-                                                <i class="bi bi-star-fill text-yellow-400"></i>
-                                            </div>
-
-                                            <p class="text-sm font-medium text-gray-500 md:text-base md:ml-2">
-                                                20 avaliações
-                                            </p>
-                                        </div> --}}
-
-                                                    {{-- TODO: Botão ver perfil --}}
-                                                    {{-- <button
-                                            class="text-violet-900 font-semibold text-sm md:mr-auto md:text-base">
-                                            <i class="bi bi-search"></i> Ver perfil
-                                        </button> --}}
+                                                <div class="flex flex-nowrap md:flex-col w-full md:w-auto justify-between md:gap-2 md:pt-1">
                                                 </div>
                                             </div>
 
                                             <div class="pt-4 text-start md:text-end">
-                                                <small
-                                                    class="text-sm md:text-base font-semibold text-orange-ddteasy">R$</small>
-                                                <p class="text-2xl md:text-4xl font-bold text-orange-ddteasy">
+                                                <small class="text-sm md:text-base font-semibold text-gray-500 line-through">R$
                                                     {{ number_format($company->companyServices->first()->daily_price / 100, 2, ',', '.') }}
+                                                </small>
+                                                <p class="text-red-600 text-sm md:text-base">10% de desconto!</p>
+                                                <p class="text-gray-600 text-sm md:text-base">Total com desconto</p>
+                                                <p class="text-2xl md:text-4xl font-bold text-violet-900 transition-all">
+                                                    R${{ number_format($company->companyServices->first()->daily_price * 0.9 / 100, 2, ',', '.') }}
                                                 </p>
-                                                <p class="text-gray-600 text-sm md:text-base">Total</p>
+
                                             </div>
                                         </div>
 
@@ -126,6 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             @endforeach
                         @else
                             <h2 class="text-xl md:text-2xl text-violet-900 font-bold text-center w-full">
