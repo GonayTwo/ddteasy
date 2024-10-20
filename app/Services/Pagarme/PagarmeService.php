@@ -25,4 +25,19 @@ class PagarmeService
             ->withHeaders(['Accept' => 'application/json'])
             ->withBasicAuth(env('PAGARME_SECRET'), '');
     }
+
+    public function testConnection()
+    {
+        try {
+            $response = $this->api->get('/customers'); // Um endpoint simples de teste
+
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                return 'Erro: ' . $response->status() . ' - ' . $response->body();
+            }
+        } catch (\Exception $e) {
+            return 'Erro ao conectar: ' . $e->getMessage();
+        }
+    }
 }

@@ -26,9 +26,25 @@ class CreateCard extends Form
     public function store()
     {
         $this->validate();
+
         $pagarme = new PagarmeService();
-        $card_data = $this->all();
-        $card_data['number'] = str_replace(' ', '', $card_data['number']);
-        $pagarme->customers()->get(auth()->user()->userable->pagarme_id)->cards()->create($card_data);
+
+        $card_data = [
+            'number' => str_replace(' ', '', $this->number),
+            'holder_name' => $this->holder_name,
+            'exp_month' => $this->exp_month,
+            'exp_year' => $this->exp_year,
+            'cvv' => $this->cvv
+        ];
+
+        try {
+            // Fazendo a requisição para criar o cartão no Pagar.me
+            $response = $pagarme->customers()->get(auth()->user()->userable->pagarme_id)->cards()->create($card_data);
+
+            return $response; // Retorna a resposta da API para ser tratada em outro lugar
+        } catch (\Exception $e) {
+            // Retorna a exceção para ser tratada no método save()
+            return null;
+        }
     }
 }
