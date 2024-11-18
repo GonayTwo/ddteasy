@@ -101,4 +101,66 @@
             </div>
         </div>
     </form>
+    
+    <!-- Modal para Empresas Não Encontradas -->
+<div x-data="{ open: @entangle('noSellersModal') }" x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white p-6 rounded shadow-md max-w-lg w-full">
+        <h2 class="text-xl font-bold mb-4 text-gray-800">Estamos Expandindo!</h2>
+        <p class="text-gray-600 mb-4">
+            Não temos prestadores disponíveis para o CEP: <span class="font-bold">{{ $modalCep }}</span>.
+        </p>
+        <p class="text-gray-600 mb-4">
+            Deixe seus dados abaixo e entraremos em contato quando houver cobertura na sua região.
+        </p>
+
+        <!-- Formulário de Cadastro -->
+        <form wire:submit.prevent="saveContact" class="flex flex-col gap-3">
+            <!-- Campo Nome -->
+            <input type="text" wire:model.defer="contact.name" placeholder="Nome" required class="p-3 border rounded w-full" />
+            @error('contact.name') 
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+
+            <!-- Campo E-mail -->
+            <input type="email" wire:model.defer="contact.email" placeholder="E-mail" required class="p-3 border rounded w-full" />
+            @error('contact.email') 
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+
+            <!-- Campo Telefone -->
+            <input type="tel" wire:model.defer="contact.phone" placeholder="Telefone" required class="p-3 border rounded w-full" />
+            @error('contact.phone') 
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+
+            <!-- Botão de Enviar -->
+            <button type="submit" class="w-full bg-violet-900 text-white py-2 rounded mt-3 hover:bg-violet-800">
+                Enviar
+            </button>
+        </form>
+
+        <!-- Mensagem de erro geral -->
+        @if ($errors->has('general'))
+            <div class="mt-4 text-red-500 text-sm">
+                {{ $errors->first('general') }}
+            </div>
+        @endif
+
+        <!-- Botão de Fechar -->
+        <button @click="open = false" class="mt-4 text-red-500">Fechar</button>
+    </div>
+</div>
+
+
+    <!-- Modal de Sucesso -->
+    <div x-data="{ open: @entangle('noSellersModal2') }" x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-green-200 p-6 rounded shadow-md max-w-lg w-full">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Sucesso!</h2>
+            <p class="text-gray-600 mb-4">
+                {{ session('success') }}
+            </p>
+
+            <button @click="open = false" class="mt-4 text-red-500">Fechar</button>
+        </div>
+    </div>
 </div>
