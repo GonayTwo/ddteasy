@@ -66,48 +66,52 @@ class SearchService extends Component
     public function save()
     {
         $this->form->validate();
-
+    
         try {
             // Buscar o endereço com base no CEP
             $address = FindCepService::cep()->get(str_replace('-', '', $this->form->cep));
-
+    
             if (!$address) {
                 throw new \Exception('Endereço não encontrado');
             }
-
-            Log::info('Endereço retornado pelo CEP:', (array) $address);
-
+    
             // Obter as coordenadas do endereço
             $coordinates = FindCepService::geolocation()->get(str_replace('-', '', $this->form->cep));
-
+    
             // Consultar empresas no raio de 25 km
             $sellers = OrderHelper::getCompaniesInRadiusArea(Company::query(), $coordinates, 25)
                 ->whereJsonContains('work_days', date('N')) // Filtrar por dia da semana
                 ->get();
-
+    
+            // Log para depuração
             Log::info('Empresas encontradas:', $sellers->toArray());
-
+    
+            // Verifique se há empresas disponíveis
             if ($sellers->isEmpty()) {
-                Log::info('Nenhuma empresa encontrada para o CEP:', ['cep' => $this->form->cep]);
-
-                // Ativar o modal para empresas não encontradas
                 $this->noSellersModal = true;
                 $this->modalCep = $this->form->cep;
-                return;
+                Log::info('Nenhuma empresa encontrada para o CEP: ' . $this->form->cep);
+                return; // Interrompe o fluxo caso nenhuma empresa seja encontrada
             }
-
-            // Fluxo normal se houver sellers
+    
+            // Garantir que o modal não será exibido
+            $this->noSellersModal = false;
+    
+            // Salvar dados na sessão
             session()->put('scheduling.address', $address);
             session()->put('scheduling.sellers', $sellers);
-
-            return redirect()->route('site.scheduling.index');
+    
+            // Redirecionar para a página de agendamento
+            Log::info('Redirecionando para a página de agendamento.');
+            return redirect('/agendamento');
         } catch (\Exception $e) {
+            // Log de erro
             Log::error('Erro ao buscar endereço ou empresas:', [
                 'cep' => $this->form->cep,
                 'mensagem' => $e->getMessage(),
             ]);
-
-            // Ativar modal de erro genérico
+    
+            // Garantir que o modal seja exibido em caso de erro
             $this->noSellersModal = true;
             $this->modalCep = null;
         }
