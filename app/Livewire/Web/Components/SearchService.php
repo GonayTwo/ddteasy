@@ -92,6 +92,7 @@ class SearchService extends Component
                 $this->modalCep = $this->form->cep;
                 Log::info('Nenhuma empresa encontrada para o CEP: ' . $this->form->cep);
                 return; // Interrompe o fluxo caso nenhuma empresa seja encontrada
+                //return redirect()->route('site.scheduling.index');
             }
     
             // Garantir que o modal não será exibido
@@ -103,7 +104,8 @@ class SearchService extends Component
     
             // Redirecionar para a página de agendamento
             Log::info('Redirecionando para a página de agendamento.');
-            return redirect('/agendamento');
+           // return redirect('/agendamento');
+           $this->form->store();
         } catch (\Exception $e) {
             // Log de erro
             Log::error('Erro ao buscar endereço ou empresas:', [
