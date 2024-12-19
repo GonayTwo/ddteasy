@@ -35,10 +35,10 @@ class FinishRegistrationForm extends Form
     #[Rule(['nullable', 'string', 'max:255'], as: 'complemento')]
     public ?string $complement = null;
 
-    #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:2048'], as: 'contrato social')]
+    #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:51200'], as: 'contrato social')]
     public $social_contract;
 
-    #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:2048'], as: 'licença sanitária')]
+    #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:51200'], as: 'licença sanitária')]
     public $sanitary_license;
 
     /* Responsible */
