@@ -48,12 +48,12 @@ class RegisterCompany extends RegisterTenant
                             ->unique()
                             ->dehydrateStateUsing(fn (?string $state): ?string => str($state)->replace(['.', '-', '/'], '')),
                         Forms\Components\Group::make([
-                            Forms\Components\FileUpload::make('social_contract')
-                                ->label('Contrato Social')
-                                ->required()
-                                ->disk('public')
-                                ->directory('companies/documents')
-                                ->acceptedFileTypes(['application/pdf']),
+                            // Forms\Components\FileUpload::make('social_contract')
+                            //     ->label('Contrato Social')
+                            //     ->required()
+                            //     ->disk('public')
+                            //     ->directory('companies/documents')
+                            //     ->acceptedFileTypes(['application/pdf']),
                             Forms\Components\FileUpload::make('sanitary_license')
                                 ->label('Licença Sanitária')
                                 ->required()

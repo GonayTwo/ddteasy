@@ -132,7 +132,7 @@
                     </div>
                 </div>
 
-                <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                {{-- <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
                     x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <label>Contrato Social (PDF)</label>
@@ -147,7 +147,7 @@
                     @error('form.social_contract')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
                     x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-error="uploading = false"

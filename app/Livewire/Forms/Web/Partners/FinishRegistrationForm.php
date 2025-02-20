@@ -35,8 +35,8 @@ class FinishRegistrationForm extends Form
     #[Rule(['nullable', 'string', 'max:255'], as: 'complemento')]
     public ?string $complement = null;
 
-    #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:51200'], as: 'contrato social')]
-    public $social_contract;
+    // #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:51200'], as: 'contrato social')]
+    // public $social_contract;
 
     #[Rule(['required', 'file', 'mimetypes:application/pdf', 'max:51200'], as: 'licença sanitária')]
     public $sanitary_license;
@@ -128,12 +128,12 @@ class FinishRegistrationForm extends Form
             'fantasy_name' => $this->fantasy_name,
             'slug' => str()->slug($this->fantasy_name),
             'cnpj' => preg_replace('/[^0-9]/', '', $this->cnpj),
-            'social_contract' => $this->social_contract,
+            'social_contract' => '',
             'sanitary_license' => $this->sanitary_license,
         ];
         $company = Company::make($company_data);
 
-        $company->social_contract = $company->social_contract->store('/companies/documents', 'public');
+        // $company->social_contract = $company->social_contract->store('/companies/documents', 'public');
         $company->sanitary_license = $company->sanitary_license->store('/companies/documents', 'public');
         $company->save();
 

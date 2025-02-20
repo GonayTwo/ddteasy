@@ -82,13 +82,13 @@ class EditCompanyProfile extends EditTenantProfile
                     ->aside()
                     ->columns(2)
                     ->schema([
-                        Components\FileUpload::make('social_contract')
-                            ->label('Contrato Social')
-                            ->required()
-                            ->openable()
-                            ->disk('public')
-                            ->directory('companies/documents')
-                            ->acceptedFileTypes(['application/pdf']),
+                        // Components\FileUpload::make('social_contract')
+                        //     ->label('Contrato Social')
+                        //     ->required()
+                        //     ->openable()
+                        //     ->disk('public')
+                        //     ->directory('companies/documents')
+                        //     ->acceptedFileTypes(['application/pdf']),
                         Components\FileUpload::make('sanitary_license')
                             ->label('Licença Sanitária')
                             ->required()

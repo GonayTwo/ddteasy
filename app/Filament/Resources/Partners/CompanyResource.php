@@ -60,11 +60,11 @@ class CompanyResource extends Resource
                                     ->options(CompanyStatus::class)
                                     ->native(false),
 
-                                Forms\Components\FileUpload::make('social_contract')
-                                    ->label('Contrato Social:')
-                                    ->disabled()
-                                    ->deletable(false)
-                                    ->openable(),
+                                // Forms\Components\FileUpload::make('social_contract')
+                                //     ->label('Contrato Social:')
+                                //     ->disabled()
+                                //     ->deletable(false)
+                                //     ->openable(),
                                 Forms\Components\FileUpload::make('sanitary_license')
                                     ->label('Licença Sanitária:')
                                     ->disabled()
@@ -225,13 +225,13 @@ class CompanyResource extends Resource
                                     ->label('CNPJ')
                                     ->formatStateUsing(fn (string $state): string => preg_replace('/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/', '$1.$2.$3/$4-$5', $state)),
 
-                                Infolists\Components\TextEntry::make('social_contract')
-                                    ->label('Contrato Social')
-                                    ->badge()
-                                    ->formatStateUsing(fn (): string => 'Contrato Social')
-                                    ->icon('heroicon-o-document')
-                                    ->url(fn (Company $record): string => Storage::url($record->social_contract))
-                                    ->openUrlInNewTab(),
+                                // Infolists\Components\TextEntry::make('social_contract')
+                                //     ->label('Contrato Social')
+                                //     ->badge()
+                                //     ->formatStateUsing(fn (): string => 'Contrato Social')
+                                //     ->icon('heroicon-o-document')
+                                //     ->url(fn (Company $record): string => Storage::url($record->social_contract))
+                                //     ->openUrlInNewTab(),
 
                                 Infolists\Components\TextEntry::make('sanitary_license')
                                     ->label('Licença Sanitária')
